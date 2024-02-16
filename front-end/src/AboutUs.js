@@ -10,13 +10,17 @@ const AboutUs = () => {
 
     useEffect(() => {
         fetch('/about-us')
-            .then(res => res.json())
-            .then(data => {
-                setAboutUsData(data)
+            .then(res => {
+                console.log('Response:', res);
+                return res.json();
             })
-            .catch(error => console.error('Error fetching About Us data: ', error))
+            .then(data => {
+                console.log('Data:', data);
+                setAboutUsData(data);
+            })
+            .catch(error => console.error('Error fetching About Us data:', error));
+    }, []);
 
-    }, [])
 
     return (
         <div>
@@ -26,7 +30,7 @@ const AboutUs = () => {
             ))}
             <img src={aboutUsData.imageUrl}
                 alt="About Us"
-                style={{ maxWidth: '100%' }} />
+                style={{ maxWidth: '20%' }} />
         </div>
     )
 }
